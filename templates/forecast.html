@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-Day Weather Forecast</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/static/cover.jpg') no-repeat center center fixed; /* Background image for the page */
+            background-size: cover;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: transparent; /* Fully transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Optional border with transparency */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+}
+
+.forecast-grid {
+    display: flex; /* Display forecast cards in a row */
+    gap: 15px;
+    justify-content: space-between;
+    padding: 10px 0;
+    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+}
+
+.forecast-day {
+    flex: 1; /* Ensure all cards are of equal width */
+    min-width: 150px; /* Minimum width for each forecast card */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forecast-day:hover {
+    transform: translateY(-5px);
+}
+
+.forecast-day img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.forecast-day h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #007bff;
+}
+
+.forecast-day p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .forecast-day {
+        min-width: 120px; /* Reduce minimum width for smaller screens */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>7-Day Weather Forecast for {{ city }}</h2>
+        {% if alert_message %}
+            <div class="alert">{{ alert_message }}</div>
+        {% endif %}
+        <div class="forecast-grid">
+            {% for day in weather_details %}
+            <div class="forecast-day" onclick="window.location.href='/hourly/{{ day.date }}?city={{ city }}'">
+                <h3>{{ day.date }}</h3>
+                <!-- Weather Icon based on condition with default fallback -->
+                <img src="/static/icons/{{ day.weather_description | lower }}.png"
+                     alt="{{ day.weather_description }}"
+                     class="weather-icon"
+                     onerror="this.onerror=null; this.src='/static/icons/default.png';">
+                <p>Avg Temp: {{ day.avg_temp }}°C</p>
+                <p>Min Temp: {{ day.min_temp }}°C, Max Temp: {{ day.max_temp }}°C</p>
+                <p>{{ day.weather_description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    text-align: center;
+    padding: 20px;
+}
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+input, button {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.map {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+.district {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.district:hover {
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
+.forecast {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.forecast-day {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    margin-bottom: 20px;
+    position: relative;
+}

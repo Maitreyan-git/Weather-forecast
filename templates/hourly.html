@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hourly Weather for {{ date }} in {{ city }}</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/static/index1.jpg') no-repeat center center fixed; /* Background image for the entire page */
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
+        .header {
+            font-size: 2rem;
+            margin: 30px 0;
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent background for header */
+            width: 100%;
+            text-align: center;
+            color: #ffecb3; /* A soft yellow color for better readability */
+        }
+
+        /* Hourly Forecast Container */
+        .hourly-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid layout */
+            gap: 15px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent dark background */
+            border-radius: 10px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Individual Hour Card */
+        .hour {
+            background: rgba(255, 255, 255, 0.2); /* Slightly transparent white background */
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hour:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Weather Icon */
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        /* Temperature Styling */
+        .temperature {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 5px 0;
+            color: #ffcc80; /* A warm orange color for temperature */
+        }
+
+        /* Weather Condition */
+        .condition {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        /* Additional Info Styling */
+        .hour p {
+            margin: 2px 0;
+            font-size: 0.8rem;
+            color: #cfd8dc; /* A light grey color for smaller details */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Hourly Weather for {{ date }} in {{ city }}</div>
+
+    <div class="hourly-container">
+        {% for hour in daily_forecast %}
+        <div class="hour">
+            <!-- Display different weather icons based on weather_description -->
+            {% if 'rain' in hour.weather_description | lower %}
+                <div class="icon"><img src="/static/icons/rain.png" alt="Rainy" style="width: 50px;"></div>
+            {% elif 'cloud' in hour.weather_description | lower %}
+                <div class="icon"><img src="/static/icons/clouds.png" alt="Cloudy" style="width: 50px;"></div>
+            {% elif 'clear' in hour.weather_description | lower %}
+                <div class="icon"><img src="/static/icons/clear.png" alt="Clear" style="width: 50px;"></div>
+            {% elif 'storm' in hour.weather_description | lower %}
+                <div class="icon"><img src="/static/icons/storm.png" alt="Stormy" style="width: 50px;"></div>
+            {% elif 'snow' in hour.weather_description | lower %}
+                <div class="icon"><img src="/static/icons/snow.png" alt="Snowy" style="width: 50px;"></div>
+            {% else %}
+                <div class="icon"><img src="/static/icons/default.png" alt="Default Weather" style="width: 50px;"></div>
+            {% endif %}
+            
+            <p class="temperature">{{ hour.temp }}°C</p>
+            <p class="condition">{{ hour.weather_description }}</p>
+            <p>{{ hour.time }}</p>
+            <p>Humidity: {{ hour.humidity }}%</p>
+            <p>Pressure: {{ hour.pressure }} hPa</p>
+            <p>Wind: {{ hour.wind_speed }} m/s</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

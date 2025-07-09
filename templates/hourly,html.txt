@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hourly Weather for {{ date }}</title>
+</head>
+<body>
+    <h2>Hourly Weather for {{ date }} in {{ city }}</h2>
+    <div>
+        {% for hour in daily_forecast %}
+        <div>
+            <p><strong>{{ hour.time }}</strong></p>
+            <p>Temperature: {{ hour.temp }}°C</p>
+            <p>Weather: {{ hour.weather_description }}</p>
+            <p>Humidity: {{ hour.humidity }}%</p>
+            <p>Pressure: {{ hour.pressure }} hPa</p>
+            <p>Wind Speed: {{ hour.wind_speed }} m/s</p>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>

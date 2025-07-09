@@ -1,0 +1,6 @@
+WEATHER_API_KEY = '58802e19f52daf91cae2b67b39157d1e'
+# Twilio account credentials (replace with your credentials)
+TWILIO_SID = 'AC1357b007fc31e84dbd34fcdd3df47f43'
+TWILIO_AUTH_TOKEN = '0d08e894b9cf536ccd96b5aafb16f0a8'
+TWILIO_PHONE_NUMBER = '+14782538620'
+ cd "C:\Users\MAITREYAN\Documents\PYTHON FILES\python project"
